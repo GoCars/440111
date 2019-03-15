@@ -3,7 +3,13 @@ import 'whatwg-fetch';
 import logo from './logo.png';
 import Loader from './Loader';
 import './App.css';
-
+function getNumbers() {
+  try {
+    return JSON.parse(localStorage.getItem('numbers'))
+  } catch (e) {
+    return []
+  }
+}
 class App extends Component {
   state = {
     loading: false,
@@ -12,7 +18,7 @@ class App extends Component {
     newNumber: '',
     name: '',
     password: localStorage.getItem('token') || '',
-    numbers: []
+    numbers: getNumbers() || []
   }
   componentDidMount() {
     this.fetch();
@@ -68,6 +74,8 @@ class App extends Component {
         this.setState({
           submitting: false,
           numbers: [...numbers, {number: newNumber, name: this.state.name}]
+        }, () => {
+          localStorage.setItem('numbers', JSON.stringify(this.state.numbers));
         });
       } catch (e) {
         this.setState({
