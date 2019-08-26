@@ -1,7 +1,9 @@
 const {buffer, text, json, send} = require('micro')
-const assert = require('assert');
-const cors = require('micro-cors')();
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config();
+}
 const sendSms = require('./sendSms');
+const cors = require('micro-cors')();
 const MongoClient = require('mongodb').MongoClient;
 // Use connect method to connect to the server
 let _db = null;

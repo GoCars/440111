@@ -14,5 +14,8 @@
   "scripts": {
     "dev": "micro",
     "start": "micro -l tcp://0.0.0.0:$PORT"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0"
   }
 }
